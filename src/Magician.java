@@ -1,13 +1,10 @@
 public class Magician extends BaseHero {
     protected int attackFire;
 
-    public Magician(String name) {
-        super(name);
-        this.attackFire = Magician.r.nextInt(10, 20);
+    public Magician(String name, int x, int y) {
+        super(name, x, y);
+        this.attackFire = 15;
         attack = attack + attackFire;
-    }
-    public Magician(){
-        super(String.format("Hero_Magician #%d", ++Magician.number));
     }
 
     @Override

@@ -1,13 +1,11 @@
 public class Spearman extends BaseHero {
     protected int armor;
+    protected int rangeAttack;
 
-    public Spearman(String name) {
-        super(name);
+    public Spearman(String name, int x, int y) {
+        super(name, x, y);
         this.armor = 3;
-
-    }
-    public Spearman(){
-        super(String.format("Hero_Spearman #%d", ++Spearman.number));
+        this.rangeAttack = 2;
     }
 
     @Override

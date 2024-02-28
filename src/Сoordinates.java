@@ -24,7 +24,7 @@ public class Сoordinates {
         return this.y;
     }
 
-    public float CalculateDistance(Сoordinates coordinates) {
+    public float calculateDistance(Сoordinates coordinates) {
         return (float) Math.sqrt(Math.pow(this.x - coordinates.x, 2) + Math.pow(this.y - coordinates.y, 2));
     }
 

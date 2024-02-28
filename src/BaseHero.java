@@ -1,8 +1,8 @@
 import java.util.Random;
-abstract class BaseHero {
+abstract class BaseHero implements Interface{
     protected static int number;
     protected static Random r;
-    protected int maxHp, maxMp, hp, mp, strength, agility, intellect, speed, attack;
+    protected int maxHp, maxMp, hp, mp, strength, agility, intellect, speed, attack, initiative;
     protected String name, team;
     protected Сoordinates coordinates;
     protected static float distance;
@@ -24,17 +24,28 @@ abstract class BaseHero {
         this.intellect = 15;
         this.attack = 20;
         this.coordinates = new Сoordinates(x,y);
+        this.initiative = 0;
 
     }
 
-    public void GetDamage(int damage) {
+    public void getDamage(int damage) {
         if (this.hp - damage > 0) {
             this.hp -= damage;
         }
+        else {
+            die();
+        }
     }
-    public void Attack(BaseHero target) {
-        int damage = BaseHero.r.nextInt(10, 20);
-        target.GetDamage(damage);
+
+    private void die() {
+        System.out.println("DIE");
+    }
+
+    public void attack(BaseHero target) {
+        int damage = 10;
+        target.getDamage(damage);
+        System.out.println(this.getClass().getSimpleName() + " " + this.name + " атакует " + target.getClass().getSimpleName() + " " + target.getName() +
+                " урон:" + damage);
     }
 
     public void Heal(int Hp) {
@@ -56,22 +67,29 @@ abstract class BaseHero {
         this.intellect += BaseHero.r.nextInt(1, 5);
         this.attack += strength+agility+intellect;
     }
-    public Сoordinates GetСoordinates() {
+    public Сoordinates getСoordinates() {
         return this.coordinates;
     }
 
-    public String GetName() {
+    public int getInitiative() {
+        return initiative;
+    }
+
+    public String getName() {
         return this.name;
     }
 
-    public float GetDistance(Сoordinates coordinates) {
-        return this.coordinates.CalculateDistance(coordinates);
+    public float getDistance(Сoordinates coordinates) {
+        return this.coordinates.calculateDistance(coordinates);
     }
 
-
+    public boolean alive(){
+        return hp>0;
+    }
 
     public String getInfo() {
-        return String.format("Name: %s  Type: %s  Hp: %d Attack: %d Сoordinates:%s",
-                this.name, this.getClass().getSimpleName(), this.hp, this.attack, this.coordinates);
+        return String.format("Name: %s  Type: %s  Hp: %d",
+                this.name, this.getClass().getSimpleName(), this.hp);
     }
+
 }

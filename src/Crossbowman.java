@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Crossbowman extends BaseHero {
     protected int arrows;
@@ -8,23 +9,46 @@ public class Crossbowman extends BaseHero {
         super(name, x, y);
         this.arrows = 15;
         this.rangeAttack = 4;
+        initiative = 3;
     }
 
-    public String FindEnemy(ArrayList<BaseHero> heroes) {
+    public BaseHero findEnemy(ArrayList<BaseHero> heroes) {
         int minI = 0;
-        float minDistance = heroes.get(minI).GetDistance(GetСoordinates());
+        float minDistance = heroes.get(minI).getDistance(getСoordinates());
         for (int i = 1; i < heroes.size(); i++){
-            float tempDistance = heroes.get(i).GetDistance(GetСoordinates());
+            float tempDistance = heroes.get(i).getDistance(getСoordinates());
             if (tempDistance < minDistance){
                 minDistance = tempDistance;
                 minI = i;
             };
         }
-        return String.format("My nearest enemy is %s. Сoordinates:(%d, %d) Distance: %s", heroes.get(minI).GetName(), heroes.get(minI).GetСoordinates().getX(), heroes.get(minI).GetСoordinates().getY(), minDistance);
+        return heroes.get(minI);
+    }
+
+    protected int getArrows(){
+        return arrows;
+    }
+    @Override
+    public String toString() {
+//        return this.getInfo();
+        return String.format("%s Arrows: %d", getInfo(), this.arrows);
     }
 
     @Override
-    public String toString() {
-        return this.getInfo();
+    public void step(ArrayList<BaseHero> heroes) {
+        if (alive()){
+            if (getArrows()>0) {
+                attack(findEnemy(heroes));
+                arrows --;
+            }
+            else {
+                System.out.println("Out of arrows");
+            }
+
+        }
+        else {
+            System.out.println("I am DIE");
+        }
+
     }
 }

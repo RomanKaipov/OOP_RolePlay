@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Monk extends BaseHero {
     protected int auraAttack;
 
@@ -5,6 +7,7 @@ public class Monk extends BaseHero {
     public Monk(String name, int x, int y) {
         super(name, x, y);
         this.auraAttack = 10;
+        initiative = 1;
 
     }
 
@@ -12,5 +15,10 @@ public class Monk extends BaseHero {
     @Override
     public String toString() {
         return this.getInfo();
+    }
+
+    @Override
+    public void step(ArrayList<BaseHero> enemy) {
+
     }
 }

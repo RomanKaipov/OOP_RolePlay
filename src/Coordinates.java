@@ -1,30 +1,31 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Сoordinates {
+public class Coordinates {
     protected int x, y;
 
-    public Сoordinates(int x, int y) {
+    public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public List<Integer> GetСoordinates (int x, int y){
+    public List<Integer> GetCoordinates (int x, int y){
         List<Integer> coordinates = new ArrayList<>();
         coordinates.add(x);
         coordinates.add(y);
         return coordinates;
 
     }
-    public int getX() {
-        return this.x;
+
+
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public int getY() {
-        return this.y;
+    public void setY(int y) {
+        this.y = y;
     }
-
-    public float calculateDistance(Сoordinates coordinates) {
+    public float calculateDistance(Coordinates coordinates) {
         return (float) Math.sqrt(Math.pow(this.x - coordinates.x, 2) + Math.pow(this.y - coordinates.y, 2));
     }
 

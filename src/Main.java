@@ -9,24 +9,26 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<BaseHero> teamOne = createTeam(teamCount);
-        ArrayList<BaseHero> teamTwo = createTeam(teamCount);
-        System.out.println("До сортировки\n");
-        printTeamsInfo(teamOne, teamTwo);
-        teamOne.sort(Comparator.comparingInt(BaseHero::getInitiative).reversed());
-        teamTwo.sort(Comparator.comparingInt(BaseHero::getInitiative).reversed());
-        System.out.println("\nПосле сортировки\n");
-        printTeamsInfo(teamOne, teamTwo);
+        ArrayList<BaseHero> teamOne = new ArrayList<>();
+        ArrayList<BaseHero> teamTwo = new ArrayList<>();
+        BaseHero Crossbowman = new Crossbowman("Crossbowman", 7,7);
+        BaseHero Rogue = new Rogue("Rogue", 2,5);
+        BaseHero Monk = new Monk("Monk", 3,6);
+        teamOne.add(Crossbowman);
+        teamTwo.add(Monk);
+        teamTwo.add(Rogue);
+        System.out.println(Rogue.coordinates);
+        Rogue.step(teamOne,teamTwo);
+        System.out.println(Rogue.coordinates);
+        Rogue.step(teamOne,teamTwo);
+        System.out.println(Rogue.coordinates);
 
-//        ArrayList<BaseHero> teamOne = new ArrayList<>();
-//        ArrayList<BaseHero> teamTwo = new ArrayList<>();
-//        BaseHero hero1 = new Crossbowman("God", 1,1);
-//        BaseHero hero2 = new Peasant("Target", 0,1);
-//        teamOne.add(hero1);
-//        teamTwo.add(hero2);
-//        printTeamsInfo(teamOne, teamTwo);
-//        hero1.step(teamTwo);
-//        printTeamsInfo(teamOne, teamTwo);
+
+
+
+
+
+
     }
 
     private static String getName() {
@@ -36,19 +38,11 @@ public class Main {
     public static void printTeamsInfo(ArrayList<BaseHero> teamOne, ArrayList<BaseHero> teamTwo) {
         System.out.println("~~~~~~~~~TeamOne~~~~~~~~~");
         for (BaseHero hero : teamOne) {
-            if (hero instanceof Crossbowman) {
-                System.out.println(String.format("%s My nearest enemy is %s", (Crossbowman) hero, ((Crossbowman) hero).findEnemy(teamTwo)));
-            } else {
                 System.out.println(hero);
-            }
         }
         System.out.println("~~~~~~~~~TeamTwo~~~~~~~~~");
         for (BaseHero hero : teamTwo) {
-            if (hero instanceof Crossbowman) {
-                System.out.println(String.format("%s My nearest enemy is %s", (Crossbowman) hero, ((Crossbowman) hero).findEnemy(teamOne)));
-            } else {
                 System.out.println(hero);
-            }
         }
     }
     public static ArrayList<BaseHero> createTeam(int teamCount){

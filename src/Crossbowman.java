@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class Crossbowman extends BaseHero {
     protected int arrows;
@@ -12,19 +11,6 @@ public class Crossbowman extends BaseHero {
         initiative = 3;
     }
 
-    public BaseHero findEnemy(ArrayList<BaseHero> heroes) {
-        int minI = 0;
-        float minDistance = heroes.get(minI).getDistance(getСoordinates());
-        for (int i = 1; i < heroes.size(); i++){
-            float tempDistance = heroes.get(i).getDistance(getСoordinates());
-            if (tempDistance < minDistance){
-                minDistance = tempDistance;
-                minI = i;
-            };
-        }
-        return heroes.get(minI);
-    }
-
     protected int getArrows(){
         return arrows;
     }
@@ -34,11 +20,13 @@ public class Crossbowman extends BaseHero {
         return String.format("%s Arrows: %d", getInfo(), this.arrows);
     }
 
+
+
     @Override
-    public void step(ArrayList<BaseHero> heroes) {
+    public void step(ArrayList<BaseHero> enemies, ArrayList<BaseHero> allyes) {
         if (alive()){
             if (getArrows()>0) {
-                attack(findEnemy(heroes));
+                attack(findAliveAllyHero(enemies));
                 arrows --;
             }
             else {

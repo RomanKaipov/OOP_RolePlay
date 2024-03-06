@@ -16,7 +16,7 @@ public class Peasant extends BaseHero {
     }
 
     @Override
-    public void step(ArrayList<BaseHero> enemy) {
+    public void step(ArrayList<BaseHero> enemies, ArrayList<BaseHero> allyes) {
 
     }
 }

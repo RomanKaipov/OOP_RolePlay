@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 public class Sniper extends BaseHero {
-    protected int rangeAtack;
+    protected int rangeAttack;
 
     public Sniper(String name, int x, int y) {
         super(name, x, y);
-        this.rangeAtack = 4;
+        this.rangeAttack = 4;
         initiative = 3;
     }
 
@@ -16,7 +16,13 @@ public class Sniper extends BaseHero {
     }
 
     @Override
-    public void step(ArrayList<BaseHero> enemy) {
+    public void step(ArrayList<BaseHero> enemies, ArrayList<BaseHero> allyes) {
+        if (alive()){
+                attack(findAliveAllyHero(enemies));
+        }
+        else {
+            System.out.println("I am DIE");
+        }
 
     }
 }

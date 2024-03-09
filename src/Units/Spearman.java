@@ -17,7 +17,7 @@ public class Spearman extends BaseHero {
 
     @Override
     public String toString() {
-        return super.toString();
+        return getInfo() + " " + super.toString();
     }
 
 

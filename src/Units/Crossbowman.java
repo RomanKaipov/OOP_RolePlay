@@ -1,18 +1,17 @@
 package Units;
 
-import Units.BaseHero;
-
 import java.util.ArrayList;
 
 public class Crossbowman extends BaseHero {
-    protected int arrows;
+    protected int arrows, maxArrows;
     protected int rangeAttack;
 
     public Crossbowman(String name, int x, int y) {
         super(name, x, y);
-        this.arrows = 15;
+        this.maxArrows = 15;
+        this.arrows = maxArrows;
         this.rangeAttack = 4;
-        attack = 300;
+        attack = 30;
         initiative = 3;
     }
 
@@ -20,10 +19,14 @@ public class Crossbowman extends BaseHero {
         return arrows;
     }
 
+
+    public void setArrows(int arrows) {
+        this.arrows = arrows;
+    }
+
     @Override
     public String toString() {
-//        return String.format("%s : %d ", getInfo(), this.arrows);
-        return super.toString() + " \u27b6:" + this.arrows;
+        return getInfo() + " " + super.toString() + " \u27b6:" + this.arrows;
     }
 
     public String getInfo() {
@@ -37,12 +40,21 @@ public class Crossbowman extends BaseHero {
                 attack(findAliveAllyHero(enemies));
                 arrows--;
             } else {
-                System.out.println("Out of arrows");
+                for (BaseHero ally : allyes) {
+                    if (ally instanceof Peasant) {
+                        Peasant peasantAlly = (Peasant) ally;
+                        if (peasantAlly.getArrows() > 0) {
+                            peasantAlly.setArrows(peasantAlly.getArrows() - 1);
+                            this.arrows++;
+                            break;
+                        }
+                    }
+                }
             }
-
         } else {
             System.out.println("I am DIE");
         }
-
     }
 }
+
+

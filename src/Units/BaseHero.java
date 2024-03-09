@@ -45,11 +45,11 @@ public abstract class BaseHero implements Interface {
 //                " урон:" + damage);
     }
 
-    public void Heal(int Hp) {
-        if (this.hp < maxHp) {
-            this.hp += Hp;
-            if (this.hp > maxHp) {
-                this.hp = maxHp;
+    public void Heal(BaseHero target, int heal) {
+        if (target.hp < target.maxHp) {
+            target.hp += heal;
+            if (target.hp > target.maxHp) {
+                target.hp = target.maxHp;
             }
         }
     }

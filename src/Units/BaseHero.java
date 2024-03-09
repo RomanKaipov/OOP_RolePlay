@@ -1,11 +1,12 @@
+package Units;
+
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Random;
-abstract class BaseHero implements Interface {
+
+public abstract class BaseHero implements Interface {
 
     protected int maxHp, maxMp, hp, mp, strength, agility, intellect, speed, attack, initiative;
     protected String name;
-    protected Coordinates coordinates;
+    public Coordinates coordinates;
 
 
     public BaseHero(String name, int x, int y) {
@@ -28,7 +29,8 @@ abstract class BaseHero implements Interface {
         if (this.hp - damage > 0) {
             this.hp -= damage;
         } else {
-            die();
+            this.hp=0;
+//            die();
         }
     }
 
@@ -37,10 +39,10 @@ abstract class BaseHero implements Interface {
     }
 
     public void attack(BaseHero target) {
-        int damage = 10;
+        int damage = this.attack;
         target.getDamage(damage);
-        System.out.println(this.getClass().getSimpleName() + " " + this.name + " атакует " + target.getClass().getSimpleName() + " " + target.getName() +
-                " урон:" + damage);
+//        System.out.println(this.getClass().getSimpleName() + " " + this.name + " атакует " + target.getClass().getSimpleName() + " " + target.getName() +
+//                " урон:" + damage);
     }
 
     public void Heal(int Hp) {
@@ -84,9 +86,14 @@ abstract class BaseHero implements Interface {
         return hp > 0;
     }
 
-    public String getInfo() {
-        return String.format("Name: %s  Type: %s  Hp: %d",
-                this.name, this.getClass().getSimpleName(), this.hp);
+    @Override
+    public String toString() {
+//        return String.format("Name: %s  Type: %s  \u2665: %d",
+//                this.name, this.getClass().getSimpleName(), this.hp);
+        return  this.name + " \u2665:" + this.hp + " ⚔:" + this.attack;
+    }
+public String getInfo() {
+        return "";
     }
 
     public String getType() {
@@ -107,51 +114,11 @@ abstract class BaseHero implements Interface {
         return heroes.get(minI);
     }
 
-
-//    public void move(BaseHero target, ArrayList<BaseHero> ally) {
-//        int dX = target.coordinates.x - coordinates.x;
-//        int dY = target.coordinates.y - coordinates.y;
-//        if (Math.abs(dX) > Math.abs(dY)) {
-//            if (canMove(ally, coordinates)) {
-//                coordinates.x += Integer.compare(dX, 0);
-//                System.out.println(getType() + " " + this.name + " go to " + target.getType() + " " + target.getName() + " (X)");
-//            } else {
-//                System.out.println(String.format("%s пропускает ход", this.getName()));
-//            }
-//        } else {
-//            if (!canMove(ally, coordinates)) {
-//                coordinates.y += Integer.compare(dY, 0);
-//                System.out.println(getType() + " " + this.name + " go to " + target.getType() + " " + target.getName() + " (Y)");
-//            } else {
-//                System.out.println(String.format("%s пропускает ход", this.getName()));
-//            }
-//        }
-//    }
-
-
-//    public boolean canMove(ArrayList<BaseHero> ally, Coordinates coordinates) {
-//        boolean res = true;
-//        for (BaseHero hero : ally) {
-//            Coordinates allyCoord = hero.coordinates;
-//            if (coordinates.x + 1 == allyCoord.x && coordinates.y == allyCoord.y) {
-//                res = false;
-//            } else if (coordinates.x - 1 == allyCoord.x && coordinates.y == allyCoord.y) {
-//                res = false;
-//            } else if (coordinates.x == allyCoord.x && coordinates.y + 1 == allyCoord.y) {
-//                res = false;
-//            } else if (coordinates.x == allyCoord.x && coordinates.y - 1 == allyCoord.y) {
-//                res = false;
-//            }
-//        }
-//        return res;
-//    }
-
-
     public boolean canMove(ArrayList<BaseHero> ally, Coordinates coordinates) {
         boolean result = true;
         for (BaseHero hero : ally) {
             Coordinates allyCoord = hero.coordinates;
-            if (allyCoord.x == coordinates.x && allyCoord.y == coordinates.y) {
+            if ((allyCoord.x == coordinates.x) && (allyCoord.y == coordinates.y) && (hero.alive())) {
                 result = false;
             }
         }
@@ -167,32 +134,40 @@ abstract class BaseHero implements Interface {
                 if (dX > 0) {
                     if (canMove(ally, new Coordinates(coordinates.x - 1, coordinates.y))) {
                         coordinates.x-= 1;
+//                        System.out.println(getType() + " " + this.name + " go to " + target.getType() + " " + target.getName() + " (X)");
                     } else {
-                        System.out.println(String.format("%s пропускает ход", this.getName()));
+//                        System.out.println(String.format("%s пропускает ход", this.getName()));
                     }
                 } else {
                     if (canMove(ally, new Coordinates(coordinates.x + 1, coordinates.y))) {
                         coordinates.x+= 1;
+//                        System.out.println(getType() + " " + this.name + " go to " + target.getType() + " " + target.getName() + " (X)");
                     } else {
-                        System.out.println(String.format("%s пропускает ход", this.getName()));
+//                        System.out.println(String.format("%s пропускает ход", this.getName()));
                     }
                 }
             } else {
                 if (dY > 0) {
                     if (canMove(ally, new Coordinates(coordinates.x, coordinates.y-1))) {
                         coordinates.y-= 1;
+//                        System.out.println(getType() + " " + this.name + " go to " + target.getType() + " " + target.getName() + " (Y)");
                     } else {
-                        System.out.println(String.format("%s пропускает ход", this.getName()));
+//                        System.out.println(String.format("%s пропускает ход", this.getName()));
                     }
                 } else {
                     if (canMove(ally, new Coordinates(coordinates.x, coordinates.y+1))) {
                         coordinates.y+= 1;
+//                        System.out.println(getType() + " " + this.name + " go to " + target.getType() + " " + target.getName() + " (Y)");
                     } else {
-                        System.out.println(String.format("%s пропускает ход", this.getName()));
+//                        System.out.println(String.format("%s пропускает ход", this.getName()));
                     }
                 }
             }
 
         }
+    }
+
+    public int getHp() {
+        return this.hp;
     }
 }

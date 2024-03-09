@@ -1,24 +1,31 @@
+package Units;
+
+import Units.BaseHero;
+
 import java.util.ArrayList;
 
-public class Monk extends BaseHero {
-    protected int auraAttack;
+public class Rogue extends BaseHero {
+    protected int stealth;
 
-
-    public Monk(String name, int x, int y) {
+    public Rogue(String name, int x, int y) {
         super(name, x, y);
-        this.auraAttack = 10;
-        initiative = 1;
-
+        this.stealth = 2;
+        attack = attack * stealth;
+        initiative = 2;
     }
 
+    public String getInfo() {
+        return "Разбойник";
+    }
 
     @Override
     public String toString() {
-        return this.getInfo();
+        return super.toString();
     }
 
     @Override
     public void step(ArrayList<BaseHero> enemies, ArrayList<BaseHero> allyes) {
+
         if (alive()) {
             BaseHero enemy = findAliveAllyHero(enemies);
             BaseHero ally = findAliveAllyHero(allyes);

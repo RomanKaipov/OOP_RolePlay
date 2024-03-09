@@ -1,3 +1,5 @@
+package Units;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,14 @@ public class Coordinates {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+       return this.y;
     }
     public float calculateDistance(Coordinates coordinates) {
         return (float) Math.sqrt(Math.pow(this.x - coordinates.x, 2) + Math.pow(this.y - coordinates.y, 2));

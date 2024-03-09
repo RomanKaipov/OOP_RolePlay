@@ -1,3 +1,7 @@
+package Units;
+
+import Units.BaseHero;
+
 import java.util.ArrayList;
 
 public class Sniper extends BaseHero {
@@ -9,10 +13,13 @@ public class Sniper extends BaseHero {
         initiative = 3;
     }
 
+    public String getInfo() {
+        return "Снайпер";
+    }
 
     @Override
     public String toString() {
-        return this.getInfo();
+        return super.toString();
     }
 
     @Override

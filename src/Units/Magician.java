@@ -1,3 +1,7 @@
+package Units;
+
+import Units.BaseHero;
+
 import java.util.ArrayList;
 
 public class Magician extends BaseHero {
@@ -10,9 +14,12 @@ public class Magician extends BaseHero {
         initiative = 1;
     }
 
+    public String getInfo() {
+        return "Ведьмак";
+    }
     @Override
     public String toString() {
-        return this.getInfo();
+        return super.toString();
     }
 
     @Override

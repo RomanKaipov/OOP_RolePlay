@@ -1,3 +1,7 @@
+package Units;
+
+import Units.BaseHero;
+
 import java.util.ArrayList;
 
 public class Peasant extends BaseHero {
@@ -12,9 +16,12 @@ public class Peasant extends BaseHero {
 
     @Override
     public String toString() {
-        return this.getInfo();
+        return super.toString();
     }
 
+    public String getInfo() {
+        return "Фермер";
+    }
     @Override
     public void step(ArrayList<BaseHero> enemies, ArrayList<BaseHero> allyes) {
 

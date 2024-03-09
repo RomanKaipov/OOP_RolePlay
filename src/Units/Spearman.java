@@ -1,3 +1,7 @@
+package Units;
+
+import Units.BaseHero;
+
 import java.util.ArrayList;
 
 public class Spearman extends BaseHero {
@@ -13,7 +17,12 @@ public class Spearman extends BaseHero {
 
     @Override
     public String toString() {
-        return this.getInfo();
+        return super.toString();
+    }
+
+
+    public String getInfo() {
+        return "Копейщик";
     }
 
     @Override
@@ -24,9 +33,8 @@ public class Spearman extends BaseHero {
             Coordinates enemyCoord = enemy.coordinates;
             if (Math.abs(coordinates.x - enemyCoord.x) <= 1 && Math.abs(coordinates.y - enemyCoord.y) <= 1) {
                 attack(enemy);
-            }
-            else {
-                move(enemy,allyes);
+            } else {
+                move(enemy, allyes);
             }
         }
     }

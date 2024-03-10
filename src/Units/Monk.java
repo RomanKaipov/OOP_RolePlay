@@ -41,7 +41,7 @@ public class Monk extends BaseHero {
             deadlist.sort((o1, o2) -> o2.speed - o1.speed);
             deadlist.getFirst().hp = maxHp;
             mp -= 10;
-            System.out.println(this.name +"Воскресил: " + deadlist.getFirst().name);
+            System.out.println(this.name +" Воскресил: " + deadlist.getFirst().name);
             flag = false;
             return;
         }
